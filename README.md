@@ -50,13 +50,26 @@
 Για το ερώτημα αυτό χρειάστηκε να τρέξουμε ξανά όλες τις προσομοιώσεις που πραγματοποιήθηκαν για το δεύτερο εργαστήριο, αυτή τη φορά ως είσοδο στο McPAT.
 
 1. **ΕΡΩΤΗΜΑ 1**
+
 Για αυτά τα ερωτήματα θα χρειαστούμε τις τιμές των area, delay και energy. Την _area_ την βρίσκουμε από την έξοδο του McPAT, το _delay_ είναι ο συνολικός χρόνος της προσομοίωσης και θα βρεθεί από το αρχείο stats.txt του gem5. Τέλος, η τιμή _energy_ μπορεί να υπολογισθεί εύκολα από το γινόμενο ισχύος με χρόνου προσομοίωσης. Την ενέργεια μπορούμε να την βρούμε απευθείας και από το script print_energy.py
 
 2. **ΕΡΩΤΗΜΑ 2**
 
+Ακολουθούν γραφήματα που απεικονίζουν την τιμή του γινομένου ενέργειας-χρόνου-περιοχής για διάφορες τιμές των cache sizes, cache lines και associativities.
+
+* **SPECLIBM**
+![speclibm cache sizes](./images/speclibm/cache_sizes.png)
+![speclibm associativities](./images/speclibm/associativities.png)
+![speclibm scatter](./images/speclibm/scatter.png)
+
+* **SPECSJENG**
+![specsjeng cache sizes](./images/specsjeng/cache_sizes.png)
+![specsjeng associativities](./images/specsjeng/associativities.png)
+![specsjeng scatter](./images/specsjeng/scatter.png)
 
 #### Πηγές
 [Energy efficiency](https://www.ovoenergy.com/guides/energy-guides/what-is-energy-efficiency?fbclid=IwAR2r1Mbxy128LRFSveaeW6ub5_nb95zvRxHTBiiWWg_a31TdYT6JOIIhTTQ)
+[McPAT official website](http://www.hpl.hp.com/research/mcpat/)
 
 #### Στοιχεία φοιτητών
 1. Ονοματεπώνυμο: Κωνσταντίνος Γερογιάννης  
