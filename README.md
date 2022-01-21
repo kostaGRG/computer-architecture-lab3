@@ -51,11 +51,16 @@
 
 1. **ΕΡΩΤΗΜΑ 1**
 
-Για αυτά τα ερωτήματα θα χρειαστούμε τις τιμές των area, delay και energy. Την _area_ την βρίσκουμε από την έξοδο του McPAT, το _delay_ είναι ο συνολικός χρόνος της προσομοίωσης και θα βρεθεί από το αρχείο stats.txt του gem5. Τέλος, η τιμή _energy_ μπορεί να υπολογισθεί εύκολα από το γινόμενο ισχύος με χρόνου προσομοίωσης. Την ενέργεια μπορούμε να την βρούμε απευθείας και από το script print_energy.py
+Για αυτά τα ερωτήματα θα χρειαστούμε τις τιμές των area, delay και energy. Την _area_ την βρίσκουμε από την έξοδο του McPAT, το _delay_ είναι ο συνολικός χρόνος της προσομοίωσης και θα βρεθεί από το αρχείο stats.txt του gem5. Τέλος, η τιμή _energy_ μπορεί να υπολογισθεί εύκολα από το γινόμενο ισχύος με χρόνου προσομοίωσης. Την ενέργεια μπορούμε να την βρούμε απευθείας και από το script print_energy.py  
+Η συνολική ενέργεια που καταναλώθηκε μπορεί να βρεθεί και από τον τύπο: Ε = P * t, οπου P οι απώλειες ισχύος (δυναμική ισχύς και ισχύ διαρροής) και t ο χρόνος της προσωμοίωσης. Δηλαδή έχουμε: 
+
+					E = (P[dynamic] + P[leakage]) * t    W
+		E= (P[RuntimeDynamic] + P[Subthreshold Leakage] + P[Gate Leakage]) * t[Seconds Simulated]   W
 
 2. **ΕΡΩΤΗΜΑ 2**
 
 Ακολουθούν γραφήματα που απεικονίζουν την τιμή του γινομένου ενέργειας-χρόνου-περιοχής για διάφορες τιμές των cache sizes, cache lines και associativities.
+
 
 * **SPECLIBM**
 ![speclibm cache sizes](./images/speclibm/cache_sizes.png)
@@ -67,9 +72,25 @@
 ![specsjeng associativities](./images/specsjeng/associativities.png)
 ![specsjeng scatter](./images/specsjeng/scatter.png)
 
+* **SPECMCF**
+![specmcf cache sizes](./images/specmcf/cache_sizes.png)
+![specmcf associativities](./images/specmcf/associativities.png)
+![specmcf scatter](./images/specmcf/scatter.png)
+
+* **SPECBZIP**
+![specbzip cache sizes](./images/specbzip/cache_sizes.png)
+![specbzip associativities](./images/specbzip/associativities.png)
+![specbzip scatter](./images/specbzip/scatter.png)
+
+3. **ΕΡΩΤΗΜΑ 3**
+
+Παρατηρούμε ότι το peak power επηρεάζεται μόνο από τις διαφορετικές επιλογές των αρχιτεκτονικών παραμέτρων (πχ. cache line size, associativity κλπ.) για κάθε επεξεργαστή, και όχι από τον υπολογιστικό φόρτο κάθε benchmark. Από τα γραφήματα φαίνεται ότι τη μεγαλύτερη επιρροή στο τελικό peak power έχει το μέγεθος γραμμής της cache, το οποίο είναι μια φθηνή λύση που αυξάνει αρκετά την απόδοση αλλά κοστίζει πάρα πολύ σε area, άρα αυξάνει το EDAP ένω, στην προηγούμενη εργασία μείωνε τη συνάρτηση κόστους. Η κατανάλωση επηρεάζεται και από το μέγεθος της L1 cache, μια επιλογή που κόστιζε αρκετά και δεν βελτίωνε ιδιαίτερα την απόδοση αλλά μικραίνει πολύ το EDAP καθώς μειώνει αρκετά το Area αλλά και την καταναλισκόμενη ενέργεια.  
+Τη μικρότερη επιρροή όλων έχει το associativity στις L1 και L2 caches καθώς και το μέγεθος της L2 cache. Το μέγεθος της L2 δεν επηρεάζει την κατανάλωση στον ίδιο βαθμό με αυτόν της L1 διότι L2, αν και μεγαλύτερη μνήμη θα σήμαινε περισσότερο χρόνο (άρα και ενέργεια), ωστόσο ενεργοποιείται μόνο όταν η L1 έχει miss. Συνεπώς, παρόλο που L2 είναι πιο ενεργοβόρα ανά lookup από την L1 λόγω μεγέθους, δε δέχεται τον ίδιο αριθμό αιτήσεων, με αποτέλεσμα να έχει μικρότερο ενεργειακό κόστος.  
+Καταλήγουμε λοιπόν πως τα αποτελέσματα μας είναι αρκετά διαφορετικά και πρέπει ως αρχιτέκτονες υπολογιστών να λαμβάνουμε υπ'όψιν διαφορετικές παραμέτρους ανάλογα με τις εκάστοτε απαιτήσεις.
+
 #### Πηγές
-[Energy efficiency](https://www.ovoenergy.com/guides/energy-guides/what-is-energy-efficiency?fbclid=IwAR2r1Mbxy128LRFSveaeW6ub5_nb95zvRxHTBiiWWg_a31TdYT6JOIIhTTQ)
-[McPAT official website](http://www.hpl.hp.com/research/mcpat/)
+[Energy efficiency](https://www.ovoenergy.com/guides/energy-guides/what-is-energy-efficiency?fbclid=IwAR2r1Mbxy128LRFSveaeW6ub5_nb95zvRxHTBiiWWg_a31TdYT6JOIIhTTQ)  
+[McPAT official website](http://www.hpl.hp.com/research/mcpat/)  
 
 #### Στοιχεία φοιτητών
 1. Ονοματεπώνυμο: Κωνσταντίνος Γερογιάννης  
